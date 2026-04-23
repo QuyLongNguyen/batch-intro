@@ -85,7 +85,7 @@ public class AdsCsvStep {
             System.out.printf(fs.readString("date"));
         }
 
-        var impressions = toLong(fs.readString("date"), 0);
+        var impressions = toLong(fs.readString("impressions"), 0);
         var clicks = toLong(fs.readString("clicks"), 0);
         var spend =  isDigits(fs.readString("spend"))
             ? createBigDecimal(fs.readString("spend"))
