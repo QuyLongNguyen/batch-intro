@@ -87,7 +87,7 @@ public class AdsCsvStep {
 
         var impressions = toLong(fs.readString("impressions"), 0);
         var clicks = toLong(fs.readString("clicks"), 0);
-        var spend =  isDigits(fs.readString("spend"))
+        var spend =  isParsable(fs.readString("spend"))
             ? createBigDecimal(fs.readString("spend"))
             : BigDecimal.ZERO;
         var conversions = toLong(fs.readString("conversions"), 0);
