@@ -1,5 +1,6 @@
 package com.recruiment.batchnoti.batchs.jobs.ads;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.batch.core.job.Job;
 import org.springframework.batch.core.job.builder.JobBuilder;
 import org.springframework.batch.core.job.parameters.RunIdIncrementer;
@@ -15,13 +16,18 @@ import org.springframework.context.annotation.Configuration;
  *
  */
 @Configuration
+@RequiredArgsConstructor
 public class AdsCsvJob {
 
+    private final Step importAdsStep;
+    private final Step exportStatsStep;
+
     @Bean
-    public Job importAdsJob(JobRepository jobRepository, Step step){
+    public Job importAdsJob(JobRepository jobRepository){
         return new JobBuilder("importAdsJob", jobRepository)
             .incrementer(new RunIdIncrementer())
-            .start(step)
+            .start(importAdsStep)
+            .next(exportStatsStep)
             .build();
     }
 }
